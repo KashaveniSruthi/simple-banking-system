@@ -41,7 +41,7 @@ Once the program is running, follow the on-screen prompts to interact with the s
 
 ### Requirements
 
-- Python 3.x
+- Python 3.10
 
 ### Note
 

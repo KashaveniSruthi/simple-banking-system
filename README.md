@@ -1,59 +1,108 @@
-# State Bank - Python Console Banking System
+# Python Console Banking System
 
-A simple console-based banking system written in Python, simulating basic banking operations like account creation, withdrawal, deposit, and checking customer balances. This project is designed to demonstrate core concepts of Python programming, including input handling, lists, and functions.
+## 📌 Overview
+This is a simple **console-based banking system** written in Python. It simulates basic banking operations like **account creation, deposits, withdrawals, balance inquiry, mini-statements, and account deletion**.
 
-## Features
+## 🚀 Features
+✅ **Open Account** – Create a new account with a secure **4-digit PIN**.
+✅ **Deposit Money** – Add funds to your bank account.
+✅ **Withdraw Money** – Withdraw funds after PIN authentication.
+✅ **Check Balance** – View customer list and their balances.
+✅ **Mini-Statement** – View **transaction history** (deposits & withdrawals).
+✅ **Delete Account** – Securely remove an account from the system.
+✅ **User-Friendly Interface** – Simple menu-driven interaction.
+✅ **Error Handling** – Validates PINs, prevents duplicate accounts, and ensures secure transactions.
 
-- **Open Account**: Create a new account with a name, a 4-digit PIN, and an initial deposit.
-- **Withdraw Money**: Withdraw funds from an account after verifying the correct name and PIN.
-- **Deposit Money**: Deposit additional funds into an existing account.
-- **Check Customers & Balances**: Display a list of all customers and their current account balances.
+## 🛠 Requirements
+- **Python 3.x** (Make sure it's installed)
 
-## How It Works
+## 📥 Installation & Running the Script
+1. **Clone the repository (or download the script):**
+   ```sh
+   git clone https://github.com/Kashavenisruthi/simple-banking-system.git
+   cd python-banking-system
+   ```
+2. **Run the script:**
+   ```sh
+   python banking_system.py
+   ```
+   Or, if Python 3 is required:
+   ```sh
+   python3 banking_system.py
+   ```
 
-The system prompts the user with a menu of options:
+## 🎯 How to Use
+When you run the script, you’ll see the following menu:
+```
+********* Welcome to State Bank *********
+1. Open a New Account
+2. Withdraw Money
+3. Deposit Money
+4. View Customers & Balances
+5. View Mini-Statement
+6. Delete Account
+7. Exit
+Enter your choice:
+```
+Select an option (1-7) to perform banking operations.
 
-1. Open a new account
-2. Withdraw money
-3. Deposit money
-4. Check customers & balances
-5. Exit the system
+### 💡 Example Transactions
+#### ➡ **Opening an Account**
+```
+Enter your choice: 1
+Enter full name: John Doe
+Set a 4-digit PIN: 1234
+Enter initial deposit: 5000
+✅ Account created successfully!
+```
+#### ➡ **Depositing Money**
+```
+Enter your choice: 3
+Enter name: John Doe
+Enter PIN: 1234
+Enter amount to deposit: 1000
+✅ Deposited 1000. New Balance: 6000
+```
+#### ➡ **Withdrawing Money**
+```
+Enter your choice: 2
+Enter name: John Doe
+Enter PIN: 1234
+Enter amount to withdraw: 2000
+✅ Withdrawn 2000. New Balance: 4000
+```
+#### ➡ **Viewing Customers & Balances**
+```
+Enter your choice: 4
+***** Customers & Balances *****
+👤 John Doe | 💰 Balance: 4000
+```
+#### ➡ **Viewing Mini-Statement**
+```
+Enter your choice: 5
+📜 Mini-Statement for John Doe:
+➡ Account Opened | Initial Deposit: 5000
+➡ Deposited: +1000 | Balance: 6000
+➡ Withdrawn: -2000 | Balance: 4000
+```
+#### ➡ **Deleting an Account**
+```
+Enter your choice: 6
+Enter name: John Doe
+Enter PIN: 1234
+✅ Account deleted successfully!
+```
 
-Users can interact with the system by entering their name and PIN for authentication and then performing desired actions such as withdrawing or depositing money.
+## 📌 Future Enhancements
+🔹 **Interest Calculation** – Monthly interest for savings accounts.
+🔹 **Loan Processing** – Loan approval & EMI calculations.
+🔹 **Graphical User Interface (GUI)** using Tkinter.
 
-### Example Workflow
+## 👨‍💻 Contributing
+Pull requests are welcome! Feel free to fork the repo and improve the system.
 
-1. **Open Account**: 
-   - Input your full name, set a PIN, and deposit an initial amount to create an account.
-   
-2. **Withdraw Money**:
-   - Enter your name, PIN, and withdrawal amount to withdraw funds. The system will check your balance and approve the transaction if sufficient funds are available.
-   
-3. **Deposit Money**:
-   - Enter your name, PIN, and deposit amount to add funds to your account.
-   
-4. **Check Customers & Balances**:
-   - Displays a list of all registered customers and their corresponding balances.
+## 📜 License
+This project is open-source and available under the **MIT License**.
 
-## Usage
+🚀 **Happy Banking!**
 
-Once the program is running, follow the on-screen prompts to interact with the system. You can open new accounts, perform deposits and withdrawals, and check the list of customers with their balances.
-
-### Requirements
-
-- Python 3.10
-
-### Note
-
-This is a simple project for educational purposes. The banking system does not persist data across sessions (data is stored in-memory during runtime only). In a real-world scenario, you would integrate a database and add security measures like encrypted PINs and secure input handling.
-
-## To Do
-
-- Encrypt customer PINs for security.
-- Add transaction history tracking for each customer.
-- Implement balance inquiry functionality.
-- Enhance error handling for edge cases.
-
-## Author
-
-**Shruthi Kashaveni**

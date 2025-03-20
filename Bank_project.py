@@ -1,116 +1,111 @@
-C_Names = ["Shruthi", "Jyothi", "Samsritha", "Shirisha", "Harsha", "Varsha"]
-C_Pins = ["2199", "9144", "9121", "9703", "8374", "12343"]
-C_Balances = [91010, 8110, 57310, 18310, 21710, 63020]
-deposite = 0
-withdrawal = 0
-balance = 0
-x = 1
-y = 5
-i = 0
-while True:
-    print("****************************************")
-    print("    ****Welcome to State Bank****       ")
-    print("****************************************")
-    print("****  1. Open a new account         ****")
-    print("****  2. Withdraw Money             ****")
-    print("****  3. Deposit Money              ****")
-    print("****  4. Check Customers & Balance  ****")
-    print("****  5. Exit/Quit                  ****")
-    print("****************************************")
-    select=input("Enter a number from above list: ")
-    if(select=="1"):
-        print("You have selected first choice :)")
-        no_of_customers=eval(input("Enter Customers Number:"))
-        i=i+no_of_customers
-        if i>5:
-            print("\nCustomer registration exceed reached or Customer registration too low")
-            i = i-no_of_customers
-        else:
-            while x<= i:
-                name=input("Enter a full name:")
-                C_Names.append(name)
-                pin=str(input("Set a pin:"))
-                C_Pins.append(pin)
-                balance=0
-                deposite=eval(input("Enter money to deposite:"))
-                balance=balance+deposite
-                C_Balances.append(balance)
-                print("\nName=",C_Names[y])
-                print("\nPin=", C_Pins[y])
-                print("\nBalance=",C_Balances[y])
-                x=x+1
-                y=y+1
-                print("\nYour name,pin and balance are added to Bank's customer list")
-                print("****New account created successfully !****")
-                print("Note:-- Please remember the Name and Pin")
-                print("****************************************")
-        Menu = input("Please press enter key to go back to main menu to perform another function or exit ...")
-    elif(select=="2"):
-        j = 0
-        print("You have selected second choice :)")
-        while j < 1:
-            k = -1
-            name = input("Please input name : ")
-            pin = input("Please input pin : ")
-            while k < len(C_Names)-1:
-                k = k + 1
-                if name == C_Names[k]:
-                    if pin == C_Pins[k]:
-                        j = j + 1
-                        print("Your Current Balance:", C_Balances[k])
-                        balance = (C_Balances[k])
-                        withdrawal = eval(input("Input value to Withdraw : "))
-                        if balance > withdrawal:
-                            balance = balance-withdrawal
-                            print("\nWithdraw Successfull!:)")
-                            C_Balances[k] = balance
-                            print("Your New Balance: ", balance)
-                        else:
-                            print("Invalid! :) \n  You have entered more than your bank balance. \n Please! Try again")
-            if j < 1:
-                print("Your name and pin does not match!\n")
-                break
-        mainMenu = input("Please press enter key to go back to main menu to perform another function or exit ...")
-    elif(select=="3"):
-        print("You have selected second choice :)")
-        n = 0
-        while n < 1:
-            k = -1
-            name = input("Please input name : ")
-            pin = input("Please input pin : ")
-            while k < len(C_Names) - 1:
-                k = k + 1
-                if name == C_Names[k]:
-                    if pin ==C_Pins[k]:
-                        n = n + 1
-                        print("Your Current Balance: ",C_Balances[k])
-                        balance = (C_Balances[k])
-                        deposition = eval(input("Enter the value you want to deposit : "))
-                        balance = balance + deposition 
-                        C_Balances[k] = balance
-                        print("\n****Deposition successful!:)")
-                        print("Your New Balance: ", balance)
-            if n < 1:
-                print("Your name and pin does not match!\n")
-                break
-        mainMenu = input("Please press enter key to go back to main menu to perform another function or exit ...")
-    elif (select=="4"):
-        print("You have selected fourth choice :)")
-        k = 0
-        print("Customer name list and balances mentioned below : ")
-        print("\n")
-        while k <= len(C_Names) - 1:
-            print("****Customer =", C_Names[k])
-            print("****Balance =", C_Balances[k],"\n")
-            k = k + 1
-        mainMenu = input("Please press enter key to go back to main menu to perform another fuction or exit ...")
-    elif (select=="5"):
-        print("You have selected fifth choice :)")
-        print("Thank you for using our banking system!")
-        print("\n")
-        break
-    else:
-        print("Sorry!! :( \n You have been selected invalid option! \n Please! Try again....")
-        mainMenu = input("Please press enter key to go back to main menu to perform another function or exit ...")
+# Dictionary to store customer details {name: (pin, balance)}
+customers = {
+    "Shruthi": ("2199", 91010),
+    "Jyothi": ("9144", 8110),
+    "Samsritha": ("9121", 57310),
+    "Shirisha": ("9703", 18310),
+    "Harsha": ("8374", 21710),
+    "Varsha": ("1234", 63020),
+}
 
-          
+# Dictionary to store mini-statements {name: [transactions]}
+transactions = {name: [] for name in customers}
+
+# Function to handle deposits & withdrawals
+def transaction(name, pin, amount, operation):
+    if name in customers and customers[name][0] == pin:
+        balance = customers[name][1]
+        if operation == "withdraw":
+            if amount > balance:
+                print(" Insufficient funds!")
+            else:
+                customers[name] = (pin, balance - amount)
+                transactions[name].append(f"Withdrawn: -{amount} | Balance: {customers[name][1]}")
+                print(f"Withdrawn {amount}. New Balance: {customers[name][1]}")
+        elif operation == "deposit":
+            customers[name] = (pin, balance + amount)
+            transactions[name].append(f"Deposited: +{amount} | Balance: {customers[name][1]}")
+            print(f" Deposited {amount}. New Balance: {customers[name][1]}")
+    else:
+        print(" Invalid name or PIN!")
+
+# Function to delete an account
+def delete_account():
+    name = input("Enter name: ").strip()
+    pin = input("Enter PIN: ").strip()
+    if name in customers and customers[name][0] == pin:
+        del customers[name]
+        del transactions[name]
+        print(" Account deleted successfully!")
+    else:
+        print(" Account not found or incorrect PIN!")
+
+# Function to show mini-statement
+def mini_statement():
+    name = input("Enter name: ").strip()
+    pin = input("Enter PIN: ").strip()
+    if name in customers and customers[name][0] == pin:
+        print(f"\n Mini-Statement for {name}:")
+        for record in transactions[name]:
+            print(f" {record}")
+        if not transactions[name]:
+            print(" No transactions yet!")
+    else:
+        print(" Invalid name or PIN!")
+
+# Main menu loop
+while True:
+    print("\n********* Welcome to State Bank *********")
+    print("1. Open a New Account")
+    print("2. Withdraw Money")
+    print("3. Deposit Money")
+    print("4. View Customers & Balances")
+    print("5. View Mini-Statement")
+    print("6. Delete Account")
+    print("7. Exit")
+    
+    choice = input("Enter your choice: ")
+    
+    if choice == "1":  # Open a new account
+        name = input("Enter full name: ").strip()
+        if name in customers:
+            print(" Account already exists!")
+            continue
+        pin = input("Set a 4-digit PIN: ").strip()
+        if not pin.isdigit() or len(pin) != 4:
+            print(" Invalid PIN! Must be 4 digits.")
+            continue
+        deposit = int(input("Enter initial deposit: "))
+        customers[name] = (pin, deposit)
+        transactions[name] = [f"Account Opened | Initial Deposit: {deposit}"]
+        print(" Account created successfully!")
+
+    elif choice == "2":  # Withdraw money
+        name = input("Enter name: ").strip()
+        pin = input("Enter PIN: ").strip()
+        amount = int(input("Enter amount to withdraw: "))
+        transaction(name, pin, amount, "withdraw")
+
+    elif choice == "3":  # Deposit money
+        name = input("Enter name: ").strip()
+        pin = input("Enter PIN: ").strip()
+        amount = int(input("Enter amount to deposit: "))
+        transaction(name, pin, amount, "deposit")
+
+    elif choice == "4":  # View customers
+        print("\n***** Customers & Balances *****")
+        for customer, details in customers.items():
+            print(f" {customer} | Balance: {details[1]}")
+    
+    elif choice == "5":  # View mini-statement
+        mini_statement()
+
+    elif choice == "6":  # Delete an account
+        delete_account()
+
+    elif choice == "7":  # Exit
+        print("🚀 Thank you for using our banking system!")
+        break
+
+    else:
+        print(" Invalid choice! Please try again.")
